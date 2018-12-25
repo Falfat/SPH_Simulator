@@ -1,0 +1,33 @@
+PROJECT SUMMARY
+===============
+
+Brief Decription
+----------------
+This software is designed to simulate a 2D fluid flow system using a space 
+and time discretisation of the Navier-Stokes and conservation of momentum 
+equations. System boundaries are implemented using the Lennard-Jones 
+Potential for repulsion to prevent particles from leaking. Timestepping 
+is adaptive to guarantee CFL stability.
+
+Goals Achieved
+--------------
+1 - SPH simulation with Forward Euler and Predictor-Corrector time stepping
+    methods.
+
+2 - SPH simulation including artificial pressure.
+
+3 - Comparison between SPH simulator and real life shallow water velocities.
+
+4 - Check for Impact of varying the smoothing length (h) factor and choice
+    of velocity of sound in water.
+
+Lesson Learned
+--------------
+1 - Effective usage of git and git-hub for group programming.
+
+2 - Team working skills.
+
+3 - Software development best practice (Usage of Travis, Sphinx, etc).
+
+4 - Time management.
+

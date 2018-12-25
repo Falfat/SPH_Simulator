@@ -1,0 +1,46 @@
+SPH Simulator Tutorial
+======================
+
+This is a short description on how to use the SPH simulator software.
+
+Installation
+------------
+The software should be used as python modules in your local folder. 
+In your python project import the modules as:
+
+import sph_fe as sphfe
+import sph_ie as sphie
+import sph_ap as sphap
+
+Requirements
+------------
+To be able to run this software, the following packages and versions 
+are required:
+
+numpy >= 1.15.4
+scipy >= 1.1.0
+matplotlib >= 3.0.2
+mpltools >= 0.2.0
+sympy >= 1.3
+pandas >= 0.23.4
+
+
+Usage
+-----
+The three modules provide different methods and adaptations to timestepping 
+the Navier-Stokes equations.
+
+sph_fe: provides a forward euler timestepping, with Lennard-Jones boundary 
+	repulsion (optimised)
+sph_ie: provides an improved predictor-corrector timestepping method with 
+	Lennard-Jones boundary repulsion
+sph_ap: provides the same predictor-corrector timestepping method, with 
+	Lennard-Jones boundary repulsion and inserted artificial pressure to 
+	prevent tensile instability.
+
+The simulation can be easily run using the sph_simulation function, common 
+amongst all modules. The simulator requires the user to specifcy a minimum 
+and maximum coordinate (in meters) of the system domain, a time frame 
+(in seconds) and a function that specifies the initial position of particles 
+of the domain with a boolean output. Other parameters are optional and if 
+not specified will be used as the default setting (SPH_Documentation).

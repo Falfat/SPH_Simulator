@@ -1,0 +1,5 @@
+Auto Generated Documentation
+============================
+
+.. automodule:: sph_ap
+   :members:

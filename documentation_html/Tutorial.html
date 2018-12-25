@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SPH Simulator Tutorial &#8212; SPH Simulator 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PROJECT SUMMARY" href="Summary.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sph-simulator-tutorial">
+<h1>SPH Simulator Tutorial<a class="headerlink" href="#sph-simulator-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This is a short description on how to use the SPH simulator software.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The software should be used as python modules in your local folder.
+In your python project import the modules as:</p>
+<p>import sph_fe as sphfe
+import sph_ie as sphie
+import sph_ap as sphap</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>To be able to run this software, the following packages and versions
+are required:</p>
+<p>numpy &gt;= 1.15.4
+scipy &gt;= 1.1.0
+matplotlib &gt;= 3.0.2
+mpltools &gt;= 0.2.0
+sympy &gt;= 1.3
+pandas &gt;= 0.23.4</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The three modules provide different methods and adaptations to timestepping
+the Navier-Stokes equations.</p>
+<dl class="docutils">
+<dt>sph_fe: provides a forward euler timestepping, with Lennard-Jones boundary</dt>
+<dd>repulsion (optimised)</dd>
+<dt>sph_ie: provides an improved predictor-corrector timestepping method with</dt>
+<dd>Lennard-Jones boundary repulsion</dd>
+<dt>sph_ap: provides the same predictor-corrector timestepping method, with</dt>
+<dd>Lennard-Jones boundary repulsion and inserted artificial pressure to
+prevent tensile instability.</dd>
+</dl>
+<p>The simulation can be easily run using the sph_simulation function, common
+amongst all modules. The simulator requires the user to specifcy a minimum
+and maximum coordinate (in meters) of the system domain, a time frame
+(in seconds) and a function that specifies the initial position of particles
+of the domain with a boolean output. Other parameters are optional and if
+not specified will be used as the default setting (SPH_Documentation).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SPH Simulator</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SPH_Documentation.html">Auto Generated Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Summary.html">PROJECT SUMMARY</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SPH Simulator Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Summary.html" title="previous chapter">PROJECT SUMMARY</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Southern Group.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,503 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Auto Generated Documentation &#8212; SPH Simulator 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PROJECT SUMMARY" href="Summary.html" />
+    <link rel="prev" title="Welcome to SPH Simulator’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-sph_ap">
+<span id="auto-generated-documentation"></span><h1>Auto Generated Documentation<a class="headerlink" href="#module-sph_ap" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sph_ap.SPH_main">
+<em class="property">class </em><code class="descclassname">sph_ap.</code><code class="descname">SPH_main</code><span class="sig-paren">(</span><em>x_min=(0.0</em>, <em>0.0)</em>, <em>x_max=(1.0</em>, <em>1.0)</em>, <em>dx=0.02</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for Smoothed Particle Hydrodynamics (SPH), a meshless method
+used for solving the Navier-Stokes equation to simulate a wave
+generation problem.</p>
+<dl class="docutils">
+<dt>h <span class="classifier-delimiter">:</span> <span class="classifier">float – determined attribute</span></dt>
+<dd>bin half size (meters). [Deafult value = 1.3]</dd>
+<dt>h_fac <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>bin half size constant (unitless).</dd>
+<dt>dx <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>particle spacing (meters).</dd>
+<dt>mu <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>viscosity (Pa s) [Deafult value = 0.001]</dd>
+<dt>rho0 <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>initial particle density (kg/m^3). [Deafult value = 1000]</dd>
+<dt>c0 <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>fit-for-purpose speed of sound in water (m/s). [Deafult value = 20]</dd>
+<dt>t_curr <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>current time of the system (s).</dd>
+<dt>gamma <span class="classifier-delimiter">:</span> <span class="classifier">constant – set attribute</span></dt>
+<dd>stiffness value (unitless). [Deafult value = 7]</dd>
+<dt>interval_smooth <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>number of timesteps to which smooth rho (unitless). [Deafult value = 15]</dd>
+<dt>interval_save <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>number of timesteps at which the current states are saved (unitless).
+[Deafult value = 15]</dd>
+<dt>CFL <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>Scale factor for Courant–Friedrichs–Lewy condition (unitless). [Deafult value = 0.2]</dd>
+<dt>B <span class="classifier-delimiter">:</span> <span class="classifier">float – determined attribute</span></dt>
+<dd>pressure constant (Pa).</dd>
+<dt>g <span class="classifier-delimiter">:</span> <span class="classifier">1D array – set attribute</span></dt>
+<dd>body force based 2D vector [gravity value (m/s^2)]. [Deafult value = [0, -9.81] ]</dd>
+<dt>file <span class="classifier-delimiter">:</span> <span class="classifier">file – determined attribute</span></dt>
+<dd>a file of results for post processing and visulaization.</dd>
+<dt>min_x <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd>lower-left boundary for the domain.</dd>
+<dt>max_x <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd>upper-right boundaries for the domain.</dd>
+<dt>max_list <span class="classifier-delimiter">:</span> <span class="classifier">list – determined attribute</span></dt>
+<dd>binning grid dimensions.</dd>
+<dt>search_grid <span class="classifier-delimiter">:</span> <span class="classifier">array</span></dt>
+<dd>binning grid.</dd>
+<dt>t_curr <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>Dyanimc. Stores time at which simulation is being run. Starts at 0.</dd>
+<dt>w_fac1 <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>A constant for the smoothing function W (m^-2).</dd>
+<dt>w_fac2 <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>A constant for the derivative smoothing function dW (m^-3.)</dd>
+<dt>particle_list <span class="classifier-delimiter">:</span> <span class="classifier">list – determined attribute</span></dt>
+<dd>A list of particles to be simulated.</dd>
+<dt>search_grid <span class="classifier-delimiter">:</span> <span class="classifier">array – determined attribute</span></dt>
+<dd>An array of searched neighbouring particles.</dd>
+<dt>lil_bit <span class="classifier-delimiter">:</span> <span class="classifier">float– determined attribute</span></dt>
+<dd>An upper limit to get np arrange working as desired.</dd>
+<dt>P_ref <span class="classifier-delimiter">:</span> <span class="classifier">float – determined attribute</span></dt>
+<dd>Boundary reference pressure to prevent leakages (Pa).</dd>
+<dt>d_ref <span class="classifier-delimiter">:</span> <span class="classifier">float – determined attribute</span></dt>
+<dd>Reference distance for enforcing boundary pressure (m).</dd>
+<dt>func <span class="classifier-delimiter">:</span> <span class="classifier">list – set attribute</span></dt>
+<dd>A list containing O and 1 to distinguish fluid particles from
+boundaries.</dd>
+<dt>interval_smooth <span class="classifier-delimiter">:</span> <span class="classifier">int – set attribute</span></dt>
+<dd>interval of timesteps at which density smoothing function is called</dd>
+<dt>interval_save <span class="classifier-delimiter">:</span> <span class="classifier">int – set attribute</span></dt>
+<dd>interval of timesteps at which data is appended to file</dd>
+</dl>
+<dl class="docutils">
+<dt>determine_values():</dt>
+<dd>Aids to determine initial simulation parameters.</dd>
+<dt>initialise_grid():</dt>
+<dd>Intializes the domain for simulation.</dd>
+<dt>add_boundaries():</dt>
+<dd>Adds the boundary points of at least 2h around the edges.</dd>
+<dt>place_points(xmin, xmax):</dt>
+<dd>Place points in a rectangle with a square spacing of specific value.</dd>
+<dt>allocate_to_grid():</dt>
+<dd>Allocates all the points to a grid to aid neighbours’ searching.</dd>
+<dt>neighbour_iterate(part):</dt>
+<dd>Finds all the particles within the search range of a specific particle.</dd>
+<dt>plot_current_state():</dt>
+<dd>Plots the current state of the system (i.e. where every particles are)
+in space.</dd>
+<dt>W(p_i, p_j_list):</dt>
+<dd>Calculates Smoothing factor for a particle being affected by
+neighbouring particles within the specified neighbourhood.</dd>
+<dt>dW(p_i, p_j_list):</dt>
+<dd>Calculates the derivative Smoothing factor for a particle being
+affected by neighbouring particles within the specified neighbourhood.</dd>
+<dt>LJ_boundary_force(p):</dt>
+<dd>Enforces boundary force to prevent fluid particles’ leaking.</dd>
+<dt>rho_smoothing(p_i, p_j_list):</dt>
+<dd>determines the smoothed density of a particle interest.</dd>
+<dt>timestepping(tf):</dt>
+<dd>Timesteps the physical problem with a set dt until
+user-specified time is reached.</dd>
+<dt>set_up_save(name, path):</dt>
+<dd>Saves the initial setup of the system and creates the csv file to
+store ongoing results as solution runs.</dd>
+<dt>save_state():</dt>
+<dd>Append the current state of every particle in the system to the
+end of the csv file.</dd>
+<dt>R_artificial_pressure(p_i, p_j_list, step) – sph_ap only:</dt>
+<dd>Determines the R component of the artificial pressure.</dd>
+<dt>dW_artificial_pressure(p_i, p_j_list, step) – sph_ap only:</dt>
+<dd>Calculates the derivative Smoothing factor component of the artificial
+pressure for a particle being affected by neighbouring particles
+within the specified neighbourhood.</dd>
+</dl>
+<dl class="method">
+<dt id="sph_ap.SPH_main.LJ_boundary_force">
+<code class="descname">LJ_boundary_force</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.LJ_boundary_force"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.LJ_boundary_force" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds acceleration to a particle p using a Lennard-Jones potential proportional
+to its distance to the outermost boundary wall
+Parameters
+———-
+p: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.R_artificial_pressure">
+<code class="descname">R_artificial_pressure</code><span class="sig-paren">(</span><em>p_i</em>, <em>p_j_list</em>, <em>step</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.R_artificial_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.R_artificial_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the R component of the artificial pressure inserted.
+Parameters
+———-
+p_i: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+<dl class="docutils">
+<dt>p_j_list: (list of objects)</dt>
+<dd>list of particles influencing particle i</dd>
+<dt>step: int</dt>
+<dd>value of 1 or 2 corresponding to the stage of the predictor corrector method</dd>
+</dl>
+<dl class="docutils">
+<dt>j_list:(np array)</dt>
+<dd>derivative of smoothing factor for particle i being affected by particles j</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.W">
+<code class="descname">W</code><span class="sig-paren">(</span><em>p_i</em>, <em>p_j_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.W"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.W" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the smoothing parameter for a particle i and all its influencing neighbours
+Parameters
+———-
+p_i: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+<dl class="docutils">
+<dt>p_j_list: (list of objects)</dt>
+<dd>particles influencing particle i</dd>
+</dl>
+<dl class="docutils">
+<dt>j_list:(np array)</dt>
+<dd>smoothing factor for particle i being affected by particles j</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.add_boundaries">
+<code class="descname">add_boundaries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.add_boundaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.add_boundaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the boundary points so at least 2h around the edge</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.allocate_to_grid">
+<code class="descname">allocate_to_grid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.allocate_to_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.allocate_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocate all the points to a grid to aid neighbour searching</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.dW">
+<code class="descname">dW</code><span class="sig-paren">(</span><em>p_i</em>, <em>p_j_list</em>, <em>step</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.dW"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.dW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the derivative of the smoothing parameter for a particle i and all
+its influencing neighbours
+Parameters
+———-
+p_i: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+<dl class="docutils">
+<dt>p_j_list: (list of objects)</dt>
+<dd>list of particles influencing particle i</dd>
+<dt>step: int</dt>
+<dd>value of 1 or 2 corresponding to the stage of the predictor corrector method</dd>
+</dl>
+<dl class="docutils">
+<dt>j_list:(np array)</dt>
+<dd>derivative of smoothing factor for particle i being affected by particles j</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.dW_artificial_pressure">
+<code class="descname">dW_artificial_pressure</code><span class="sig-paren">(</span><em>p_i</em>, <em>p_j_list</em>, <em>step</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.dW_artificial_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.dW_artificial_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the derivative Smoothing factor component of the artificial
+pressure for a particle being affected by neighbouring particles
+within the specified neighbourhood.
+Parameters
+———-
+p_i: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+<dl class="docutils">
+<dt>p_j_list: (list of objects)</dt>
+<dd>list of particles influencing particle i</dd>
+<dt>step: int</dt>
+<dd>value of 1 or 2 corresponding to the stage of the predictor corrector method</dd>
+</dl>
+<dl class="docutils">
+<dt>j_list:(np array)</dt>
+<dd>derivative of smoothing factor for particle i being affected by particles j</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.determine_values">
+<code class="descname">determine_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.determine_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.determine_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set simulation parameters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.initialise_grid">
+<code class="descname">initialise_grid</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.initialise_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.initialise_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initalise simulation grid.
+func takes array x and returns 1 for particle in fluid or 0 for no particle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.neighbour_iterate">
+<code class="descname">neighbour_iterate</code><span class="sig-paren">(</span><em>part</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.neighbour_iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.neighbour_iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all the particles within 2h of the specified particle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.place_point">
+<code class="descname">place_point</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>bound=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.place_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.place_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place particle at point given and assigns the particle attribute boundary
+x: float</p>
+<blockquote>
+<div>x location of particle assuming positive to the right and negative to the left</div></blockquote>
+<dl class="docutils">
+<dt>y: float</dt>
+<dd>y location of particle assuming positive up and negative down</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.plot_current_state">
+<code class="descname">plot_current_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.plot_current_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.plot_current_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the current state of the system (i.e. where every particle is)
+in space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.rho_smoothing">
+<code class="descname">rho_smoothing</code><span class="sig-paren">(</span><em>p_i</em>, <em>p_j_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.rho_smoothing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.rho_smoothing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the smoothed density of a particle i and
+Parameters
+———-
+p_i: (object)</p>
+<blockquote>
+<div>particle where calculations are being performed</div></blockquote>
+<dl class="docutils">
+<dt>p_j_list: (list of objects)</dt>
+<dd>list of particles influencing particle i</dd>
+</dl>
+<dl class="docutils">
+<dt>rho:(float)</dt>
+<dd>particle i smoothed density</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.save_state">
+<code class="descname">save_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.save_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.save_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append the current state of every particle in the system to the
+end of the csv file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.set_up_save">
+<code class="descname">set_up_save</code><span class="sig-paren">(</span><em>name=None</em>, <em>path='raw_data/'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.set_up_save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.set_up_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the initial setup of the system and creates the csv file to
+store ongoing results as solution runs.
+Files are stored with name in file path (defaults to raw_data folder
+with name given by the time of the simulation).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sph_ap.SPH_main.timestepping">
+<code class="descname">timestepping</code><span class="sig-paren">(</span><em>tf</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_main.timestepping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_main.timestepping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timesteps the physical problem with a set dt
+until user-specified time is reached.
+Uses a Predictor-Corrector timestepping method and adds
+artificial pressure to reduce tensile instability
+in the problem</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sph_ap.SPH_particle">
+<em class="property">class </em><code class="descclassname">sph_ap.</code><code class="descname">SPH_particle</code><span class="sig-paren">(</span><em>main_data=None</em>, <em>x=array([0.</em>, <em>0.])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_particle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_particle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Particles class containing all the attributes for a single particle
+Attributes
+———-
+id: int</p>
+<blockquote>
+<div>particle characteristic ID</div></blockquote>
+<dl class="docutils">
+<dt>main_data: class object</dt>
+<dd>object that refers to the domain where particle is located. Should be created
+from SPH_main class</dd>
+<dt>x: array-like of floats</dt>
+<dd>[x,y] position of the particle on the domain at time t_curr (m)</dd>
+<dt>v: array-like of floats</dt>
+<dd>[V_x, V_y] velocities of the particle on the domain at a time t_curr (m/s)</dd>
+<dt>a: array-like of floats</dt>
+<dd>[a_x, a_y] acceleration of the particle on the domain at a time t_curr (m/s^2)</dd>
+<dt>D: float</dt>
+<dd>rate of change of density of particle at a time t_curr (kg/m^3s)</dd>
+<dt>P: float</dt>
+<dd>pressure of particle at a time t_curr (Pa)</dd>
+<dt>bound: boolean</dt>
+<dd>Whether or not particle is a boundary (fixed) particle. 1 if it’s a boundary 0 if not</dd>
+<dt>adj: list-like of objects</dt>
+<dd>list of neighbouring influencing particles</dd>
+</dl>
+<dl class="method">
+<dt id="sph_ap.SPH_particle.calc_index">
+<code class="descname">calc_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#SPH_particle.calc_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.SPH_particle.calc_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the 2D integer index for the particle’s
+location in the search grid</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="sph_ap.sph_simulation">
+<code class="descclassname">sph_ap.</code><code class="descname">sph_simulation</code><span class="sig-paren">(</span><em>x_min</em>, <em>x_max</em>, <em>t_final</em>, <em>dx</em>, <em>func</em>, <em>path_name='./'</em>, <em>ani=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sph_ap.html#sph_simulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sph_ap.sph_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates fluid flow from user-specified initial state and timeframe using
+smoothed particle hydrodynamics method.</p>
+<dl class="docutils">
+<dt>x_min <span class="classifier-delimiter">:</span> <span class="classifier">list-like</span></dt>
+<dd>List with [x,y] coordinates of bottom left boundary, assumed rectangular</dd>
+<dt>x_max <span class="classifier-delimiter">:</span> <span class="classifier">list-like</span></dt>
+<dd>List with [x,y] coordinates of upper right boundary, assumed rectangular</dd>
+<dt>t_final <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Timeframe of simulation.</dd>
+<dt>dx <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Initial distance between particles in domain. Particles assumed to be
+equally spaced on domain specified by func</dd>
+<dt>func <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd>A function that specifies the initial distribution of particles in the
+domain with a boolean output.</dd>
+<dt>path name <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd>Path where files are to be saved.</dd>
+<dt>ani <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
+<dd>“True” if animation is to be displayed and “False” if otherwise.</dd>
+</dl>
+<dl class="docutils">
+<dt>ani_step: int</dt>
+<dd>frame skipping</dd>
+<dt>ani_key: string</dt>
+<dd>header for colorplot. Choose beteween: ID, Pressure, Density, V_x, and V_y</dd>
+<dt>h_fac <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>bin half size constant (unitless).</dd>
+<dt>mu <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>viscosity (Pa s) [Deafult value = 0.001]</dd>
+<dt>rho0 <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>initial particle density (kg/m^3). [Deafult value = 1000]</dd>
+<dt>c0 <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>fit-for-purpose speed of sound in water (m/s). [Deafult value = 20]</dd>
+<dt>gamma <span class="classifier-delimiter">:</span> <span class="classifier">constant – set attribute</span></dt>
+<dd>stiffness value (unitless). [Deafult value = 7]</dd>
+<dt>interval_smooth <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>number of timesteps to which smooth rho (unitless). [Deafult value = 15]</dd>
+<dt>interval_save <span class="classifier-delimiter">:</span> <span class="classifier">integer – set attribute</span></dt>
+<dd>number of timesteps at which the current states are saved (unitless).
+[Deafult value = 15]</dd>
+<dt>CFL <span class="classifier-delimiter">:</span> <span class="classifier">float – set attribute</span></dt>
+<dd>Scale factor for Courant–Friedrichs–Lewy condition (unitless). [Deafult value = 0.2]</dd>
+<dt>g <span class="classifier-delimiter">:</span> <span class="classifier">1D array – set attribute</span></dt>
+<dd>body force based 2D vector [gravity value (m/s^2)]. [Deafult value = [0, -9.81] ]</dd>
+<dt>tf <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Total real time to run simulation.</dd>
+<dt>P_ref <span class="classifier-delimiter">:</span> <span class="classifier">float (only in the Forward Euler Module)</span></dt>
+<dd>Boundary reference pressure to prevent leakages (Pa).</dd>
+<dt>d_ref <span class="classifier-delimiter">:</span> <span class="classifier">float (only in the Forward Euler Module)</span></dt>
+<dd>Reference distance for enforcing boundary pressure (m).</dd>
+<dt>file_name <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd>Name of file to be saved. If None saves with current time[Default = None]</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SPH Simulator</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auto Generated Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Summary.html">PROJECT SUMMARY</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">SPH Simulator Tutorial</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to SPH Simulator’s documentation!</a></li>
+      <li>Next: <a href="Summary.html" title="next chapter">PROJECT SUMMARY</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Southern Group.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/SPH_Documentation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
